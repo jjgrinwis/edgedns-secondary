@@ -48,5 +48,5 @@ with open("zones.csv") as csvfile:
             DnsZoneArgs["tsig_key"]["secret"] = row["tsig_secret"]
             DnsZoneArgs["tsig_key"]["algorithm"] = row["tsig_algorithm"]
 
-        # pass our created dict as argument to DnsZone
+        # pass our created dict as argument to DnsZone and let Pulumi create this EdgeDNS zone
         my_zone = akamai.DnsZone(row["zone"], **DnsZoneArgs)
