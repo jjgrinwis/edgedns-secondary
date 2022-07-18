@@ -22,7 +22,7 @@ group_id = akamai.get_group(contract_id=contract_id, group_name=group_name).id
 
 # now read a file with all the zones we need to create
 # first line in CSV has the field names used as dict keys per row
-# zone;secondaries
+# zone;masters;tsig_name;tsig_algorithm;tsig_secret
 with open("zones.csv") as csvfile:
     reader = csv.DictReader(csvfile, delimiter=";")
     for row in reader:
