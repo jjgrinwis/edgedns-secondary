@@ -26,17 +26,17 @@ group_id = akamai.get_group(contract_id=contract_id, group_name=group_name).id
 with open("zones.csv") as csvfile:
     reader = csv.DictReader(csvfile, delimiter=";")
     for row in reader:
-        # each row will have a zone and list of secondaries and possible tsig values
+        # each row will have a zone and list of masters and possible tsig values
         # now let's create these secondary zones using akamai.DnsZone resource
         # https://www.pulumi.com/registry/packages/akamai/api-docs/edgedns/dnszone/
-        # secondaries should be list of IPs!
+        # masters should be list of IPs!
 
         # we're creating a dict and feed that into akamai.DnsZone call
         DnsZoneArgs = {}
         DnsZoneArgs["contract"] = contract_id
         DnsZoneArgs["group"] = group_id
         DnsZoneArgs["zone"] = row["zone"]
-        DnsZoneArgs["masters"] = row["secondaries"].split(",")
+        DnsZoneArgs["masters"] = row["masters"].split(",")
         DnsZoneArgs["comment"] = "created via Pulumi"
         DnsZoneArgs["type"] = "secondary"
 
